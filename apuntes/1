@@ -1,0 +1,6 @@
+    /*  CREACIÓN Y ACTIVACIÓN DE ENTORNOS   */
+
+* virtualenv -p $(which python3.5) env nombreDelEntorno
+
+* Activacion del entorno virtual, hay que hacerlo cada vez que vayamos a trabajar
+  . nombreDelEntorno/bin/activate
