@@ -1,0 +1,132 @@
+    _______________________________________
+    |                                     |
+    |  CREACIÓN Y ACTIVACIÓN DE ENTORNOS  |
+    |_____________________________________|
+
+* virtualenv -p $(which python3.5) env nombreDelEntorno
+
+* Activacion del entorno virtual, hay que hacerlo cada vez que vayamos a trabajar
+  . nombreDelEntorno/bin/activate
+  
+  
+     _________________________
+    |                        |
+    |   INSTALACIÓN DJANGO   |
+    |________________________|
+
+
+* pip install django
+
+     _________________________
+    |                        |
+    |    INICIAR PROYECTO    |
+    |________________________|
+
+* Entramos en nuestro entorno
+
+* django-admin startproject nombreProyecto
+
+     _________________________
+    |                        |
+    |    EJECUTAR PROYECTO   |
+    |________________________|
+
+* python manage.py runserver $IP:$PORT
+
+
+* En settings.py tenemos que configurar las urls válidas para nuestro proyecto,esto se hace con: 
+
+    ALLOWED_HOSTS = ['django-anamc.c9users.io']
+
+    __________________________________________
+    |                                        |
+    |  CONFIGUARACION DEL ETORNO PARA  PODER |
+    |      TRABAJAR CON phpmyadmin y no con  |    
+    |                 sqlite3                |
+    |________________________________________|
+    
+* cd /etc/apache2/
+
+* sudo ports.conf  -> Cambiamos puertos 8080 a 8081
+
+* sudo nano sites-available/001-cloud9.conf  -> Cambiamos puertos 8080 a 8081
+
+* sudo -H pip3 install mysqlclient
+
+* Instalar phpmyadmin
+
+* En settings.py cambiar DATABASE con nuestros datos
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'XXXX',
+            'USER': 'XXXX',
+            'PASSWORD' : 'XXXX'
+        }
+    }
+    
+    ___________________
+    |                 |
+    |    MIGRACIÓN    |
+    |_________________|
+    
+* python manage.py migrate
+
+*** Si da un error hacer: 
+
+*** sudo apt-get install mysql-server-5.6
+  
+    En nuestro entorno ->  python manage.py runserver $IP:$PORT 
+ 
+    despues hacer la migración  
+ 
+    python manage.py migrate
+ 
+    ___________________
+    |                 |
+    |    EATRUCTURA   |
+    |_________________|
+ 
+* urls.py -> Para definir las rutas // Nuestro enrutador
+
+* manage.py: acceso a django-admin  // Nuestro manage
+
+* wsgi.py: de uso en el despliegue
+
+* __init__.py: archivo vacío, indicador paquete django
+
+* admin.py: configuración de django admin
+
+* apps.py: configuración app
+
+* models.py: definición de entidades // Nuestros modelos
+
+* tests.py: tests de unidad // Son importantes de hacer
+
+* views.py: gestión de peticiones/respuestas  //Nuestras vistas
+
+    _______________________________________
+    |                                     |
+    |  CREACIÓN DE NUESTRA APLICACION     |
+    |_____________________________________|
+    
+* Dentro de nuestro entorno, en proyecto1 creamos nuestra app "foro"
+
+* django-admin startapp foro 
+
+* En settings.py : 
+
+        INSTALLED_APPS = [
+                          'django.contrib.admin',
+                                .
+                                .
+                                .
+                          'foro'
+        ]
+
+/*para definir vistas:*/
+
+* En proyecto1/foro/views.py agregamos
+
+* from django.http import HttpResponse
